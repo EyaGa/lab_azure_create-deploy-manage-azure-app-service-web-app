@@ -21,7 +21,15 @@ jobs:
 
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v1.0.5
-
+        
+      - task: NuGetCommand@2
+        displayName: 'NuGet Restore'
+        inputs:
+          command: 'restore'
+          restoreSolution: '**/*.sln'  # Vérifiez que ce modèle correspond à votre structure de dossiers
+          feedsToUse: 'select'
+          vstsFeed: '<NomDeVotreFeed>'
+        
       - name: Restore NuGet packages
         run: nuget restore
 
