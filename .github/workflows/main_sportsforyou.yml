@@ -21,16 +21,8 @@ jobs:
 
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v1.0.5
-        
-      - task: NuGetCommand@2
-        displayName: 'NuGet Restore'
-        inputs:
-          command: 'restore'
-          restoreSolution: '**/*.sln'  # Vérifiez que ce modèle correspond à votre structure de dossiers
-          feedsToUse: 'select'
-          vstsFeed: '<NomDeVotreFeed>'
-        
-      - name: Restore NuGet packages
+
+      - name: NuGet Restore
         run: nuget restore
 
       - name: Publish to folder
@@ -55,6 +47,9 @@ jobs:
         with:
           name: ASP-app
       
+      - name: NuGet Restore
+        run: nuget restore
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
